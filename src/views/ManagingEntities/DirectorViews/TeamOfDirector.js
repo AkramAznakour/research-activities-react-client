@@ -72,7 +72,7 @@ const Team = () => {
   return (
     <div className="container">
       <PageHeader
-        title={team ? `laboratoire ${team.abbreviation}` : ""}
+        title={team ? `Equipe ${team.abbreviation}` : ""}
         subTitle={team ? team.name : ""}
       />
       {team == null && <Loader size="60" />}

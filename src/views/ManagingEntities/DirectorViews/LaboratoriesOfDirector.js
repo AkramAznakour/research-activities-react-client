@@ -62,6 +62,7 @@ import React, {
   
     
     const manageLaboratory = ({ _id }) => {
+      console.log("manage directory");
       history.push(`/laboratory/${_id}`);
     };
   

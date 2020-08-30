@@ -60,7 +60,7 @@ const makeEstablishmentService = (api) => ({
   deleteEstablishment: (_id) => api.delete(`/establishments/${_id}`),
   getEstablishmentLaboratories: (_id) => api.get(`/establishments/${_id}/laboratories`),
   setEstablishmentResearchDirector: (establishment_id, user_id) => api.post(`/research-director/${establishment_id}/${user_id}`),
-  getEstablishmentOfDirector: (director_id) => api.get(`/establishments/research-director/${director_id}`)
+  getEstablishmentOfDirector: (director_id) => api.get(`/establishment-of-director/${director_id}`)
 });
 
 const makeLaboratoryService = (api) => ({
