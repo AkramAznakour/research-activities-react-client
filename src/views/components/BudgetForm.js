@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ReportTable from "../Statistics/ReportTable";
 
 const BudgetForm = ({
   inputs,
@@ -7,11 +9,14 @@ const BudgetForm = ({
   handleSubmit,
   cancelEdit,
   action,
-  title
+  title,
+  willPrint,
+  teamPublications,
+  loading
 }) => {
-  const handleInputsChange = (event) => {
+  const handleNumberInputsChange = (event) => {
     event.persist();
-    if(Number.isInteger(parseInt(event.target.value)))
+    if(  Number.isInteger(parseInt(event.target.value)))
        {setInputs((inputs) => ({
         ...inputs,
         [event.target.name]: parseInt(event.target.value),
@@ -19,7 +24,16 @@ const BudgetForm = ({
       
         console.log("inputs",inputs);}
   };
-
+  const handleInputsChange = (event) => {
+    event.persist();
+   
+       setInputs((inputs) => ({
+        ...inputs,
+        [event.target.name]: event.target.value,
+        }));
+      
+        console.log("inputs",inputs);}
+  
   useEffect(() => {
     console.log(inputsSkeleton);
     console.log("inputs",inputs);
@@ -59,7 +73,7 @@ const BudgetForm = ({
                     type="text"
                     pattern="[0-9]*"
                     className="form-control"
-                    onChange={handleInputsChange}
+                    onChange={handleNumberInputsChange}
                     value={inputs[input.name]}
                     name={input.name}
                   />
@@ -87,12 +101,21 @@ const BudgetForm = ({
           ))}
         </div>
         <div className="card-footer text-right">
-          <button onClick={cancelEdit} className="mr-2 btn btn-outline-danger">
+         { !willPrint&&
+         <div>
+         <button onClick={cancelEdit} className="mr-2 btn btn-outline-danger">
             Annuler
           </button>
           <button type="submit" className="btn btn-primary">
             Soumettre
           </button>
+          </div>}
+          { willPrint&&
+             <Fragment>
+             <PDFDownloadLink className="btn  btn-sm m-1  btn-outline-primary" document={ <ReportTable teamPublications={teamPublications} team={inputs.team} year={inputs.year.toString()}/>} fileName={"Rapport"}>
+               { (loading ? "Chargement du document..." : "Imprimer le rapport")}
+             </PDFDownloadLink>
+           </Fragment>     }
         </div>
       </form>
     </div>

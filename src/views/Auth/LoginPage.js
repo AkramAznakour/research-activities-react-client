@@ -112,7 +112,7 @@ function LoginPage() {
             border-color: blue;
           `
           }
-          size={80}
+          size={70}
           color={"#123abc"}
           loading={Loading}
         />

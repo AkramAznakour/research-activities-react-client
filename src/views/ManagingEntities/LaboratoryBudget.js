@@ -7,13 +7,11 @@ import React, {
     useCallback,
   } from "react";
 
-  import { AppContext } from "../../context/AppContext";
-  import PageHeader from "../components/PageHeader";
-  import BudgetForm from "../components/BudgetForm";
-  import C3Chart from "react-c3js";
-import StatisticsTable from "../Statistics/components/StatisticsTable";
+import { AppContext } from "../../context/AppContext";
+import PageHeader from "../components/PageHeader";
+import BudgetForm from "../components/BudgetForm";
+import C3Chart from "react-c3js";
 import BudgetTable from "../Statistics/components/BudgetTable";
-import AddBudget from "../components/AddBudget";
 
   const LaboratoryBudget = () => {
   

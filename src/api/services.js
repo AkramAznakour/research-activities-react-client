@@ -102,6 +102,8 @@ const makePhdStudentsService = (api) => ({
 });
 const makeStatisticsService = (api) => ({
   getStatistics: (filter) => api.get(`/statistics`, { params: filter }),
+  getPublicationsPerTeam: (filter) => api.get(`/team-publications`, { params: filter }),
+
 });
 
 const makeNotificationsService = (api) => ({

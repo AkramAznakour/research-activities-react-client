@@ -32,7 +32,9 @@ import {
   TeamIcon,
   SettingsIcon,
   PhdIcon,
+
   BudgetIcon,
+
 } from "../views/components/icons";
 import TeamsStatistics from "../views/Statistics/TeamsStatistics";
 import LabStatistics from "../views/Statistics/labStatistics";
@@ -217,7 +219,7 @@ const StatisticsPaths = {
 
 const budgetPath = {
 title: "Budget",
-  isDropdown: true,
+  isDropdown: false,
   icon : BudgetIcon,
   routes: [
     {
@@ -226,18 +228,10 @@ title: "Budget",
       path: "/Budget",
       component: LaboratoryBudget,
      roles: ["LABORATORY_HEAD"],
-  icon: TeamIcon,
+  icon: BudgetIcon,
   inMenu: true,
     },
-    {
-
-      title: "Rapport",
-      path: "/Rapport",
-      component: Report,
-     roles: ["LABORATORY_HEAD"],
-  icon: TeamIcon,
-  inMenu: true,
-    },
+    
     {
       title: "Budget",
       path: "/Budget-CED",
@@ -250,7 +244,20 @@ title: "Budget",
   ]
 }
     
-
+const reportPath = {
+  title: "Rapport",
+  isDropdown: false,
+  routes: [
+    {
+      title: "Rapport",
+      path: "/Rapport",
+      component: Report,
+      roles: ["LABORATORY_HEAD"],
+      icon: TeamIcon,
+      inMenu: true,
+    },
+  ],
+};
 
 const followedResearchersPaths = {
   title: "Chercheur suivis",
@@ -357,6 +364,7 @@ const menus = [
   StatisticsPaths,
   budgetPath,
   errorPathsCategory,
+  reportPath
   
 ];
 
@@ -370,7 +378,9 @@ const routes = [
   ...phdStudentsPaths.routes,
   ...StatisticsPaths.routes,
   ...budgetPath.routes,
+  ...reportPath.routes,
   ...errorPathsCategory.routes,
+  
 ];
 
 export { routes, menus };

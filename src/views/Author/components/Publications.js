@@ -5,6 +5,7 @@ import "datatables";
 
   const Publications = ({ author, setAuthor ,platform}) => {
   useEffect(() => {
+
     $(".datatable").DataTable({
       oLanguage: {
         sInfo:
