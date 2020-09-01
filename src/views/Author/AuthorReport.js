@@ -116,6 +116,10 @@ const AuthorReport = ({ author }) => {
             </View>
           </View>
           {author.publications
+          .sort(
+            (a, b) =>
+              parseInt(b.year.trim() || 0)  - parseInt(a.year.trim() || 0)
+          )
           .map((publication, index) => (
             <View key={index} style={styles.tableRow}>
               <View style={{ ...styles.tableCol, width: "80%" }}>
