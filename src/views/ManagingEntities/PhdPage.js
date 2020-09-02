@@ -215,6 +215,11 @@ const PhdPage = () => {
         "visible";
       document.getElementById("Directeur de thèse").style.visibility = "hidden";
     }
+    else{
+      document.getElementById("Directeur de thèse").style.visibility = "visible";
+      document.getElementById("Co-Directeur de thèse").style.visibility =
+      "visible";
+    }
   };
 
   const addPhdStudent = async () => {
@@ -230,7 +235,6 @@ const PhdPage = () => {
           supervisor: inputs.supervisor_id,
           thesisTitle: inputs.thesisTitle,
         };
-        console.log("STUDENT", student);
         const response = await phdStudentService.createPhdStudent(student);
         if (response.data) {
           updatePhdStudentData();
@@ -244,16 +248,14 @@ const PhdPage = () => {
 
   const updatePhdStudent = async (student) => {
     try {
+
       let newStudent = {
         ...inputs,
         cotutelle: inputs.cotutelle.localeCompare("non") === 0 ? false : true,
         coSupervisor:
-          inputs.coSupervisor_id.localeCompare("néant") === 0
-            ? null
-            : inputs.coSupervisor_id,
+          inputs.coSupervisor_id,
         supervisor: inputs.supervisor_id,
       };
-      console.log("New Student", newStudent);
 
       const response = await phdStudentService.updatePhdStudent({
         ...student,
@@ -481,7 +483,7 @@ const ImpressionModel = ({
               </div>
             )}
             {(user.roles.includes("CED_HEAD") ||
-              user.roles.includes("REASEARCH_DIRECTOR")) && (
+              user.roles.includes("RESEARCH_DIRECTOR")) && (
               <div className="form-group mt-2">
                 <h4>Laboratoire</h4>
                 <div>
