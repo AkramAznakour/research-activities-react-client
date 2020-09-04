@@ -18,10 +18,10 @@ const Researchers = () => {
     try {
       const response = await userService.getResearchers();
       if (response.data) {
-        const filteredResearchers = response.data.filter(
+        /*const filteredResearchers = response.data.filter(
           (researcher) => researcher.creatorId === user._id
-        );
-        setResearchers(filteredResearchers);
+        );*/
+        setResearchers(response.data);
       } else throw Error();
     } catch (error) {
       pushAlert({ message: "Incapable d'obtenir les données des chercheurs" });
