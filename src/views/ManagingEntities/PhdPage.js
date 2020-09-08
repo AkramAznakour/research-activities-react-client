@@ -192,7 +192,7 @@ const PhdPage = () => {
       document.getElementById("Directeur de thèse").style.visibility =
         "visible";
     }
-    if (!response.data.supervisor._id.localeCompare(user._id)) {
+    else if (!response.data.supervisor._id.localeCompare(user._id)) {
       let coIndex = coSupervisors.findIndex(
         (sup) => !sup.name.localeCompare(student.coSupervisor)
       );
