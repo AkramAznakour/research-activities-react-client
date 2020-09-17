@@ -54,7 +54,7 @@ const Publication = ({
         setIsFetched(true);
         updatePublication(index, {
           ...publication,
-          IF: response.data.journal["Impact Factor"],
+          IF: response.data.journal["IF"],
           SJR: response.data.journal["SJR"],
           searchedFor: true,
         });
@@ -75,7 +75,7 @@ const Publication = ({
     if (!publication.IF && !publication.SJR && !publication.searchedFor)
       setTimeout(() => {
         if (isMounted) getJournalData();
-      }, index * 2000);
+      }, index * 60000);
 
     return () => {
       isMounted = false;
