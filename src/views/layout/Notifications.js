@@ -100,12 +100,12 @@ const Notifications = () => {
 
         const responses = await Promise.all(
           newPublications.map(
-            async ({ title }) =>
+            async (publication) =>
               await notificationsService.notifyFolloweers({
                 authorId: followedUser.authorId,
-                publication: title,
+                author_user_id: followedUser.user_id,
+                publication,
                 followedUserId: followedUser.user_id,
-                scrapedPublications,
               })
           )
         );
@@ -219,7 +219,7 @@ const Notification = ({ notification, markAsRead }) => {
       <Link
         onClick={(e) => {
           e.preventDefault();
-          history.push("/author/" + notification.authorId);
+          history.push("/profile/" + notification.author_user_id);
           pushAlert({
             type: "info",
             autoClose: false,
