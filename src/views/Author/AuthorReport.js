@@ -105,7 +105,7 @@ const AuthorReport = ({ author }) => {
               <Text style={styles.tableCell}>Année</Text>
             </View>
             <View style={{ ...styles.tableCol, width: "10%" }}>
-              <Text style={styles.tableCell}>citations</Text>
+              <Text style={styles.tableCell}>Citations</Text>
             </View>
             <View style={{ ...styles.tableCol, width: "10%" }}>
               <Text style={styles.tableCell}>SJR</Text>
