@@ -27,8 +27,7 @@ const userShortBio = ({
  
   let shortBio = []
   roles.forEach((role)=>{
-    if(role != "")
-      shortBio.push(role);
+    if (role !== "") shortBio.push(role + ". ");
   })
 
   if(!shortBio.length)
