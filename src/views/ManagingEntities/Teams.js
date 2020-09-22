@@ -118,6 +118,18 @@ const Teams = () => {
       const response = await teamService.deleteTeam(team._id);
       if (response.data) updateTeamData();
       else throw Error();
+
+      if (team.head_id === user._id) {
+        pushAlert({
+          type: "success",
+          message:
+            "vous êtes chef de l'équipe que vous venez de supprimer. Vous serez déconnecté pour rétablir vos rôles",
+        });
+
+        setTimeout(() => {
+          history.push("/login");
+        }, 1500);
+      }
     } catch (error) {
       pushAlert({ message: "Incapable de supprimer l'équipe" });
     }
