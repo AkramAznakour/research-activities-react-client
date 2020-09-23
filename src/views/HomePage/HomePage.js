@@ -25,10 +25,15 @@ const HomePage = () => {
           vous recherchez.
         </p>
         <div className="empty-action">
-          <Link to="/" className="btn btn-primary">
+          <button
+            onClick={() => {
+              document.getElementById("author-search-input").focus();
+            }}
+            className="btn btn-primary"
+          >
             <LoopIcon />
             Rechercher un auteur
-          </Link>
+          </button>
         </div>
       </div>
 

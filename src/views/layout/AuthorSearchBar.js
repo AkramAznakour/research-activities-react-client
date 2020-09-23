@@ -18,6 +18,7 @@ const AuthorSearchBar = ({ history }) => {
           <LoopIcon />
         </span>
         <input
+          id="author-search-input"
           onKeyDown={handleKeyDown}
           type="text"
           className="form-control form-control-flush w-100"
