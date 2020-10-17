@@ -48,11 +48,19 @@ const makeApiServices = ({ token, alertService }) => {
     headers: { "Content-Type": "application/json" },
   });
 
+  const scraperApi = axios.create({
+    baseURL: process.env.REACT_APP_SCRAPER_URL,
+    timeout: 30000,
+    headers: { "Content-Type": "application/json" },
+  });
+
   setUpInterceptors({ api: backendApiNoAuth, serviceName: "back-office" });
+  setUpInterceptors({ api: scraperApi, serviceName: "web scraping" });
 
   if (!token)
     return {
       authentificationService: makeAuthentificationService(backendApiNoAuth),
+      scraperService: makeScraperService(scraperApi),
     };
 
   const backendApi = axios.create({
@@ -64,13 +72,6 @@ const makeApiServices = ({ token, alertService }) => {
     },
   });
 
-  const scraperApi = axios.create({
-    baseURL: process.env.REACT_APP_SCRAPER_URL,
-    timeout: 30000,
-    headers: { "Content-Type": "application/json" },
-  });
-
-  setUpInterceptors({ api: scraperApi, serviceName: "web scraping" });
   setUpInterceptors({ api: backendApi, serviceName: "back-office" });
 
   return {

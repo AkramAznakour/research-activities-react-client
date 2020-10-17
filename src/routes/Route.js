@@ -13,7 +13,7 @@ const Route = ({ component: Component, roles, ...rest }) => {
           <Redirect to={{ pathname: page, state: { from: props.location } }} />
         );
 
-        if (!user) return redirectTo("/login");
+        if (!user && roles) return redirectTo("/login");
 
         if (roles && !user.roles.some((r) => roles.includes(r)))
           return redirectTo("/");

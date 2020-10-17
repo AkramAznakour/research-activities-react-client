@@ -7,7 +7,7 @@ import { AppContext } from "../../context/AppContext";
 const MenuBar = withRouter(({ history, location, ...props }) => {
   const { user } = useContext(AppContext);
 
-  let menus = getMenuForRole(user.roles);
+  let menus = user ? getMenuForRole(user.roles) : ['RESEARCHER'];
  
 
   return (
@@ -18,7 +18,7 @@ const MenuBar = withRouter(({ history, location, ...props }) => {
       <div className="container">
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav">
-            {menus.map((menu, index) => (
+            {user &&  menus.map((menu, index) => (
               <li
                 className={`nav-item ${
                   location.pathname === menu.path ? "active" : ""

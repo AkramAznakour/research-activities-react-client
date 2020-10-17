@@ -6,6 +6,7 @@ import { AppContext } from "../../context/AppContext";
 import ApplicationAlerts from "../components/ApplicationAlerts";
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
+import { LoopIcon } from "../components/icons";
 
 function LoginPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,10 @@ function LoginPage() {
   useEffect(() => {
     setUser();
   }, []);
+
+  const goToVisitorsPage = () => {
+    history.push("/visitors");
+  };
 
   const handleInputsChange = (event) => {
     event.persist();
@@ -118,6 +123,16 @@ function LoginPage() {
         />
                 
               </form>
+              <div className="m-2 text-center">
+                <button
+                  type="submit"
+                  className="btn btn  btn-secondary "
+                  onClick={goToVisitorsPage}
+                >
+                  <LoopIcon />
+                  Chercher un auteur
+                </button>
+              </div>
             </div>
           </div>
         </div>

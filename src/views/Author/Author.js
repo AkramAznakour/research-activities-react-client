@@ -42,7 +42,7 @@ const Author = (props) => {
       const response = await scraperService.getAuthorData(platform, authorId);
       if (response.data.author) {
         setAuthor(response.data.author);
-        checkFollowAuthorization(response.data.author);
+        if (user) checkFollowAuthorization(response.data.author);
       } 
       else if (response.data.error) setNoResultFound(true);
       else {
@@ -118,6 +118,7 @@ const Author = (props) => {
 
   useEffect(() => {
     getAuthorData();
+    if (!user) return;
     if (
       ["LABORATORY_HEAD", "TEAM_HEAD", "RESEARCHER"].some((r) =>
         user.roles.includes(r)

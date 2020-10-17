@@ -19,29 +19,31 @@ const Publication = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const getJournalData = async () => {
+    if (publication.searchedFor) return;
+
+    const journalName = publication.source
+      ? publication.source
+      : publication.extraInformation && publication.extraInformation["Journal"]
+      ? publication.extraInformation["Journal"]
+      : null;
+
+    if (!journalName || !publication.year || publication.year.trim() === "") {
+      console.log("No data");
+      updatePublication(index, {
+        ...publication,
+        searchedFor: true,
+      });
+      return;
+    }
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
+      console.log("jouranlName : ", journalName);
 
-      const jouranlName = publication.source
-        ? publication.source
-        : publication.extraInformation &&
-          publication.extraInformation["Journal"]
-        ? publication.extraInformation["Journal"]
-        : null;
-
-      console.log("jouranlName : ", jouranlName);
-
-      if (!jouranlName) {
-        updatePublication(index, {
-          ...publication,
-          searchedFor: true,
-        });
-        return;
-      }
-      const jouranlNameQuery = jouranlName.replace("/", "").replace("\\", "");
+      const journalNameQuery = journalName.replace("/", "").replace("\\", "");
 
       const response = await scraperService.getJournalData(
-        jouranlNameQuery,
+        journalNameQuery,
         publication.year
       );
       if (response.data.error || response.data.status === 404) {
@@ -60,14 +62,18 @@ const Publication = ({
         });
       }
     } catch (e) {
+      updatePublication(index, {
+        ...publication,
+        searchedFor: true,
+      });
       pushAlert({
         message:
           "Incapable d'obtenir les données de la publication" +
           publication.title,
       });
-    } finally {
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -75,7 +81,7 @@ const Publication = ({
     if (!publication.IF && !publication.SJR && !publication.searchedFor)
       setTimeout(() => {
         if (isMounted) getJournalData();
-      }, index * 4000);
+      }, index * 2000 + 2000);
 
     return () => {
       isMounted = false;

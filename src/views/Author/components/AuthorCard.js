@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
 
 const AuthorCard = ({ author }) => {
+  const { user } = useContext(AppContext);
   return (
     <div className="col-lg-4 col-md-6 ">
       <div className="card">
         <div className="card-body p-3">
-          {author.platform === "scopus" && <ScopusCard author={author} />}
-          {author.platform === "scholar" && <ScholarCard author={author} />}
+          {author.platform === "scopus" && (
+            <ScopusCard author={author} user={user} />
+          )}
+          {author.platform === "scholar" && (
+            <ScholarCard author={author} user={user} />
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-const ScopusCard = ({ author }) => (
+const ScopusCard = ({ author, user }) => (
   <div className="row row-sm align-items-center">
     <div className="col-auto">
       <span className="avatar  avatar-md ">
@@ -24,7 +30,13 @@ const ScopusCard = ({ author }) => (
     <div className="col" style={{ minWidth: "auto" }}>
       <Link
         className="text-body d-block pb-2"
-        to={"/author/" + author.platform+"/"+ author.authorId}
+        to={
+          (!user ? "/visitors" : "") +
+          "/author/" +
+          author.platform +
+          "/" +
+          author.authorId
+        }
       >
         {author.name ? author.name.substr(0,25) : ""}
         <span className={"badge pull-right ml-2 bg-orange"}>
@@ -46,7 +58,7 @@ const ScopusCard = ({ author }) => (
   </div>
 );
 
-const ScholarCard = ({ author }) => (
+const ScholarCard = ({ author, user }) => (
   <div className="row row-sm align-items-center">
     <div className="col-auto">
       {author.profilePicture && (
@@ -61,9 +73,15 @@ const ScholarCard = ({ author }) => (
     <div className="col" style={{ minWidth: "auto" }}>
       <Link
         className="text-body d-block pb-2"
-        to={"/author/" + author.platform+"/"+ author.authorId}
+        to={
+          (!user ? "/visitors" : "") +
+          "/author/" +
+          author.platform +
+          "/" +
+          author.authorId
+        }
       >
-        {author.name ? author.name.substr(0,25) : ""}
+        {author.name ? author.name.substr(0, 25) : ""}
         <span className="badge pull-right ml-2 bg-blue">{author.platform}</span>
       </Link>
 

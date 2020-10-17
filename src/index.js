@@ -8,6 +8,7 @@ import { AppProvider } from "./context/AppContext";
 import Route from "./routes/Route";
 
 import LoginPage from "./views/Auth/LoginPage";
+import Visitors from "./views/Visitors/Visitors";
 
 import MenuBar from "./views/layout/MenuBar";
 import NavBar from "./views/layout/NavBar";
@@ -28,7 +29,10 @@ const App = () => (
   <AppProvider>
     <Router history={history}>
       <Switch>
-        <PublicRoute path="/login" component={LoginPage} />    
+        <PublicRoute exact path="/login" component={LoginPage} />    
+        <PublicRoute exact path="/visitors" component={Visitors} />    
+        <PublicRoute exact path="/visitors/author-search/:authorName" component={Visitors} />    
+        <PublicRoute exact path="/visitors/author/:platform/:authorId" component={Visitors} />    
         <Route path="/*" component={MainLayout} />
       </Switch>
     </Router>
