@@ -15,7 +15,7 @@ const AuthorSearchBar = ({ history }) => {
   };
 
   return (
-    <form className="form-inline w-50 mr-4 d-none d-md-flex">
+    <form className=" w-100 ">
       <div className="input-icon w-100">
         <span className="input-icon-addon">
           <LoopIcon />
@@ -25,7 +25,7 @@ const AuthorSearchBar = ({ history }) => {
           onKeyDown={handleKeyDown}
           type="text"
           className="form-control form-control-flush w-100"
-          placeholder="Rechercher ici un auteur. Exemple : Nom Prenom"
+          placeholder="Exemple : Nom Prenom. Rechercher ici un auteur... "
         />
       </div>
     </form>
