@@ -9,7 +9,5 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} 
           github-token: ${{ secrets.TOKEN_RESEARCH_ACTIVITIES_CLIENT }} #Optional 
-          vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
-          working-directory: ./        
